@@ -4,6 +4,11 @@ let currentYear = new Date().getFullYear()
 let defaultDate = new Date(new Date(0).setFullYear(currentYear + 1))
 
 const goalSchema = mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
     text: {
         type: String,
         required: [true, 'Please add a goal'],
