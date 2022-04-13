@@ -22,7 +22,7 @@ const Login = () => {
   }
 
   return (
-    <>
+    <React.Fragment>
       <section className='heading'>
         <h1>
           <AccountCircleIcon fontSize='large' /> Login        
@@ -42,7 +42,7 @@ const Login = () => {
           </div>
         </form>
       </section>
-    </>
+    </React.Fragment>
   )
 }
 
