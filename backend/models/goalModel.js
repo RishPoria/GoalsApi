@@ -1,8 +1,5 @@
 const mongoose = require('mongoose')
 
-let currentYear = new Date().getFullYear()
-let defaultDate = new Date(new Date(0).setFullYear(currentYear + 1))
-
 const goalSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -18,7 +15,6 @@ const goalSchema = mongoose.Schema({
     },
     targetDate: {
         type: Date,
-        default: defaultDate,
     },
 }, { timestamps: true })
 

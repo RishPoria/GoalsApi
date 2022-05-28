@@ -11,10 +11,6 @@ const setGoal = asyncHandler(async(req, res) => {
         res.status(400)
         throw new Error('Please provide a text field')
     }
-    if (!req.body.targetDate) {
-        res.status(400)
-        throw new Error('Please provide a target date')
-    }
     const goal = await Goal.create({
         text: req.body.text,
         description: req.body.description,

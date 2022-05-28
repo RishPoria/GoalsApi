@@ -1,41 +1,46 @@
-import React from 'react'
-import {useState} from 'react'
+import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {toast} from 'react-toastify'
 import {createGoal} from '../features/goals/goalSlice'
 
-function GoalForm() {
+function GoalForm() {  
+  const [formData, setFormData] = useState({
+    text: '',
+    description: '',
+    targetDate: '',
+  })
 
-    const [formData, setFormData] = useState({
-      text: '',
-      description: '',
-      targetDate: new Date(),
-    })
+  const {text, description, targetDate} = formData
 
-    const {text, description, targetDate} = formData
+  const dispatch = useDispatch()
 
-    const dispatch = useDispatch()
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
+  }
 
-    const onChange = (e) => {
-      setFormData((prevState) => ({
-        ...prevState,
-        [e.target.name]: e.target.value
-      }))
-    }
-
-    const onSubmit = e => {
-        e.preventDefault()
-        if(text.length==0)
-          toast.error("Add goal")
-        else{
-          const goalData = {
-            text, 
-            description, 
-            targetDate, 
-          }
-          dispatch(createGoal({goalData}))
+  const onSubmit = (e) => {
+      e.preventDefault()
+      if(text.length === 0)
+        toast.error("Add goal")
+      else{
+        const currentYear = new Date().getFullYear()
+        const nextYear = new Date(new Date(0).setFullYear(currentYear + 1))
+        const goalData = {
+          text, 
+          description, 
+          targetDate: targetDate === '' ? nextYear : targetDate , 
         }
-    }
+        dispatch(createGoal(goalData))
+        setFormData({
+          text: '',
+          description: '',
+          targetDate: '',
+        })
+      }
+  }
   return (
     <section className='form'>
       <form onSubmit={onSubmit}>

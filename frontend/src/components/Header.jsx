@@ -5,13 +5,15 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
-import HeaderLogo from './HeaderLogo.png'
+//import HeaderLight from './HeaderLogos/HeaderLight.png'
+import HeaderDark from './HeaderLogos/HeaderDark.png'
+import DarkMode from './DarkMode/DarkMode.tsx'
 
 const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {user} = useSelector((state) => state.auth)
-
+  
   const onLogout = () => {
     dispatch(logout())
     dispatch(reset())
@@ -23,10 +25,11 @@ const Header = () => {
       <div className='logo'>
         <Link to='/'>
           {
-            <img src={HeaderLogo} className='headerlogo' alt='GoalSetter' />
+            <img src={HeaderDark} className='headerlogo' alt='GoalSetter' />
           }
         </Link>
       </div>
+      <DarkMode />
       <ul>
         { user ? (
           <li>
